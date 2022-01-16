@@ -1,10 +1,11 @@
 package battleship;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Ship {
 
-    public ArrayList<Cell> cells;
+    public List<Cell> cells;
     private int length;
 
     /**
@@ -21,14 +22,13 @@ public class Ship {
      */
     @Override
     public String toString() {
-        String s = switch (length) {
+        return switch (length) {
             case 1 -> "submarine.";
             case 2 -> "destroyer.";
             case 3 -> "cruiser.";
             case 4 -> "battleship.";
             default -> "carrier.";
         };
-        return s;
     }
 
     /**
@@ -69,8 +69,8 @@ public class Ship {
      * Make all ship's cells sunk.
      */
     private void sink() {
-        for (int i = 0; i < cells.size(); i++) {
-            cells.get(i).shipCellStatus = ShipCellStatus.Sunk;
+        for (Cell cell : cells) {
+            cell.shipCellStatus = ShipCellStatus.Sunk;
         }
     }
 }

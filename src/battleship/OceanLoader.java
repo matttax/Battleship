@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class Ocean {
+public class OceanLoader {
     private CellStatus[][] field;
     public ArrayList<Ship> ships;
     public HashMap<Cell, Ship> shipCells;
@@ -21,7 +21,7 @@ public class Ocean {
      * @param battleships Number of battleships
      * @param carriers Number of carriers
      */
-    public Ocean(int n, int m, int submarines, int destroyers, int cruisers, int battleships, int carriers) {
+    public OceanLoader(int n, int m, int submarines, int destroyers, int cruisers, int battleships, int carriers) {
         N = n;
         M = m;
         ships = new ArrayList<>();

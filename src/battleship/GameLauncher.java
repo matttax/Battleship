@@ -12,7 +12,7 @@ public class GameLauncher {
      * Launches game with user's input.
      */
     public void launch() {
-        Ocean battlefield = null;
+        OceanLoader battlefield;
         do {
             battlefield = setOcean();
         } while (battlefield == null);
@@ -26,7 +26,7 @@ public class GameLauncher {
 
     /**
      * Launches game that is already created.
-     * @param craftGame
+     * @param craftGame Game with user-set parameters.
      */
     public void launch(Game craftGame) {
         play(craftGame);
@@ -58,7 +58,7 @@ public class GameLauncher {
      * Locate ships defined by user.
      * @return Matrix of cells. Some of them are ships.
      */
-    private Ocean setOcean() {
+    private OceanLoader setOcean() {
         int n, m, submarines, destroyers, cruisers, battleships, carriers;
         System.out.print("Enter length: ");
         n = readInt(15);
@@ -74,9 +74,9 @@ public class GameLauncher {
         battleships = readInt(24);
         System.out.print("Enter number of carriers: ");
         carriers = readInt(16);
-        Ocean ocean;
+        OceanLoader ocean;
         try {
-            ocean = new Ocean(n, m, submarines, destroyers, cruisers, battleships, carriers);
+            ocean = new OceanLoader(n, m, submarines, destroyers, cruisers, battleships, carriers);
         }
         catch (InvalidParameterException parameterException) {
             System.out.println(parameterException.getMessage());
@@ -89,11 +89,11 @@ public class GameLauncher {
     private Cell readTurn(int xLim, int yLim) {
         System.out.print("Enter cell (\"A 4\", \"C 8\", etc.): ");
         Cell hitCell = new Cell(-1, -1);
-        Cell invalidCell = new Cell(-1, -1);
+        final Cell invalidCell = new Cell(-1, -1);
         do {
             String line = scanner.nextLine();
             String[] input = line.toLowerCase().split(" ");
-            int x = -1, y = -1;
+            int x, y;
             try {
                 NumberFormatException numex = new NumberFormatException("Incorrect format! " +
                         "Should be \"A 4\", \"C 8\", etc.");

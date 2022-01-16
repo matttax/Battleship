@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Game {
 
     private ShipCellStatus[][] gameField;
-    private Ocean ocean;
+    private OceanLoader ocean;
 
     public final int torpedoesCount;
     private int torpedoesLeft;
@@ -16,7 +16,7 @@ public class Game {
      * @param ocean Battlefield.
      * @param torpedoes Number of torpedoes owned by user.
      */
-    public Game(Ocean ocean, int torpedoes) {
+    public Game(OceanLoader ocean, int torpedoes) {
         this.ocean = ocean;
         gameField = new ShipCellStatus[ocean.N][ocean.M];
         for (ShipCellStatus[] row : gameField) {
@@ -60,20 +60,20 @@ public class Game {
      */
     @Override
     public String toString() {
-        String field = "";
-        field += " \t";
+        StringBuilder field = new StringBuilder();
+        field.append(" \t");
         for (int i = 1; i < ocean.M + 1; i++){
-            field += i + "\t";
+            field.append(i).append("\t");
         }
-        field += "\n";
+        field.append("\n");
         for (int i = 0; i < ocean.N; i++) {
-            field += (char)('A' + i) + "\t";
+            field.append((char) ('A' + i)).append("\t");
             for (int j = 0; j < ocean.M; j++) {
-                field += (Cell.cellType(gameField[i][j]));
+                field.append(Cell.cellType(gameField[i][j]));
             }
-            field += "\n";
+            field.append("\n");
         }
-        return field;
+        return field.toString();
     }
 
     /**
